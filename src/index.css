@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4F46E5;
+  --color-primary-dark: #4338CA;
+  --color-accent: #10B981;
+  --color-surface: #FFFFFF;
+  --color-background: #F8FAFC;
+  
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  background-color: #F8FAFC;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #F0F2F5;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.chat-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Markdown rendering styles */
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+}
+
+.markdown-container th {
+  background-color: #F8FAFC;
+  color: #475569;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #E2E8F0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.markdown-container td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  color: #334155;
+}
+
+.markdown-container tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-container tr:hover {
+  background-color: #F8FAFC;
+}
+
+.markdown-container p {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-container p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-container ul, .markdown-container ol {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+  list-style-type: decimal;
+}
+
+.markdown-container ul {
+  list-style-type: disc;
+}
+
+.markdown-container li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-container img {
+  max-width: 100%;
+  max-height: 380px;
+  border-radius: 0.75rem;
+  margin: 0.75rem auto;
+  display: block;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+
