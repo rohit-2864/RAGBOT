@@ -10,4 +10,5 @@ __pycache__/
 uploads/
 *.pyc
 data/
-
+.venv/
+venv/

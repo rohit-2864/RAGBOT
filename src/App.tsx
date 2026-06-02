@@ -290,7 +290,7 @@ export default function App() {
           relevantChunks = await searchRes.json();
           context = relevantChunks.map(c => {
             if (c.modality === 'image' && c.storagePath) {
-              return `[Source Image: ${c.source}, Page: ${c.page}, Reference: /uploads/${c.storagePath}]\nThis is a relevant visual diagram/image from the document. If the user asks for diagram, image, visual details, or the matched topic, you MUST render this image inline in your response by outputting exactly this markdown tag: ![Image from ${c.source}](/uploads/${c.storagePath})`;
+              return `[Source Image: ${c.source}, Page: ${c.page}]\nThis is a relevant visual diagram/image from the document. The text/OCR content of this image is: ${c.text || 'Visual document content'}`;
             }
             const modalityLabel = c.modality ? ` (${c.modality})` : '';
             return `[Source: ${c.source}${modalityLabel}, Page: ${c.page}]\n${c.text}`;
@@ -307,8 +307,7 @@ CONSTRAINTS:
 2. If the answer is not in the context, say "I don't know. The provided documents do not contain information about this."
 3. Be concise and professional.
 4. Maintain a coherent conversation based on the history.
-5. For image sources, describe what was matched and why it's relevant.
-6. Crucially, if the user asks to see an image, diagram, or chart, and there is a relevant "[Source Image]" in the RETRIEVED CONTEXT, you MUST show it inline in your response using the exact markdown image tag provided in the context (e.g. ![Image from source](/uploads/path.png)). Do NOT say you cannot show images.
+5. For image sources, describe the visual content or matched diagram details textually. Do NOT attempt to display or render any images, HTML image tags, or markdown image tags in your response.
 
 CONVERSATION HISTORY:
 ${historyContext}
@@ -607,14 +606,9 @@ ASSISTANT RESPONSE:`;
                                 {source.modality}{source.page ? ` • P. ${source.page}` : ''}
                               </span>
                             </div>
-                            {source.modality === 'image' && source.storagePath ? (
-                              <div className="mt-2 rounded-lg overflow-hidden border border-slate-100 bg-black/5 flex items-center justify-center">
-                                <img 
-                                  src={`/uploads/${source.storagePath}`} 
-                                  alt={source.text || "source image"} 
-                                  className="max-h-32 w-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-200" 
-                                  onClick={() => window.open(`/uploads/${source.storagePath}`, '_blank')}
-                                />
+                            {source.modality === 'image' ? (
+                              <div className="mt-1 bg-slate-100/50 p-2 rounded-md border border-slate-200/30 text-slate-500 italic max-h-32 overflow-y-auto">
+                                [Visual Source Content]: "{source.text || 'No text extracted'}"
                               </div>
                             ) : source.text.trim().startsWith('|') ? (
                               <div className="markdown-container overflow-x-auto text-[9px] mt-1 bg-white p-1 rounded-md border border-slate-100 max-h-32">
